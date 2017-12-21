@@ -42,6 +42,13 @@ class TelegramRequest
     protected $files = [];
 
     /**
+     * Indicates if the request to Telegram will be asynchronous (non-blocking).
+     *
+     * @var bool
+     */
+    protected $isAsyncRequest = false;
+
+    /**
      * Timeout of the request in seconds.
      *
      * @var int
@@ -62,6 +69,7 @@ class TelegramRequest
      * @param string|null $method
      * @param string|null $endpoint
      * @param array|null  $params
+     * @param bool        $isAsyncRequest
      * @param int         $timeOut
      * @param int         $connectTimeOut
      */
@@ -70,6 +78,7 @@ class TelegramRequest
         $method = null,
         $endpoint = null,
         array $params = [],
+        $isAsyncRequest = false,
         $timeOut = 60,
         $connectTimeOut = 10
     ) {
@@ -77,6 +86,7 @@ class TelegramRequest
         $this->setMethod($method);
         $this->setEndpoint($endpoint);
         $this->setParams($params);
+        $this->setAsyncRequest($isAsyncRequest);
         $this->setTimeOut($timeOut);
         $this->setConnectTimeOut($connectTimeOut);
     }
@@ -230,6 +240,30 @@ class TelegramRequest
         $headers = $this->getDefaultHeaders();
 
         return array_merge($this->headers, $headers);
+    }
+
+    /**
+     * Make this request asynchronous (non-blocking).
+     *
+     * @param $isAsyncRequest
+     *
+     * @return TelegramRequest
+     */
+    public function setAsyncRequest($isAsyncRequest)
+    {
+        $this->isAsyncRequest = $isAsyncRequest;
+
+        return $this;
+    }
+
+    /**
+     * Check if this is an asynchronous request (non-blocking).
+     *
+     * @return bool
+     */
+    public function isAsyncRequest()
+    {
+        return $this->isAsyncRequest;
     }
 
     /**

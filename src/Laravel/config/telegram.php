@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Asynchronous Requests [Optional]
+    |--------------------------------------------------------------------------
+    |
+    | When set to True, All the requests would be made non-blocking (Async).
+    |
+    | Default: false
+    | Possible Values: (Boolean) "true" OR "false"
+    |
+    */
+    'async_requests' => env('TELEGRAM_ASYNC_REQUESTS', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | HTTP Client Handler [Optional]
     |--------------------------------------------------------------------------
     |

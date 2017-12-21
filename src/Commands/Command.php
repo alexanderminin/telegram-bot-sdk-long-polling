@@ -122,6 +122,16 @@ abstract class Command implements CommandInterface
     }
 
     /**
+     * Get Action passed to the command.
+     *
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->arguments;
+    }
+
+    /**
      * Get Arguments passed to the command.
      *
      * @return string
