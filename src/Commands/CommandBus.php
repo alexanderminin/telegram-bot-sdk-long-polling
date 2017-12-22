@@ -151,14 +151,31 @@ class CommandBus
     {
         $match = $this->parseCommand($message);
         if (!empty($match)) {
-            $command = $match[1];
+            $command   = $match[1];
             $action    = (!empty($match[2])) ? $match[2] : '';
-            $arguments = str_replace(["\n", "    ","   ","  "], [" "," "," "," "], trim($match[3]));
-            $arguments = explode(" ", $arguments);
+            $arguments = $this->parseArguments($match[3]);
             $this->execute($command, $action, $arguments, $update);
+        } elseif (array_key_exists('not_command', $this->commands)) {
+            // Use unnamed command handler for not command messages
+            $this->commands['not_command']->make($this->telegram, "", $this->parseArguments($message), $message);
         }
 
         return $update;
+    }
+
+    /**
+     * Parse a Arguments.
+     *
+     * @param $message
+     *
+     * @return array
+     */
+    public function parseArguments($message)
+    {
+        $arguments = str_replace(["\n", "    ","   ","  "], [" "," "," "," "], trim($message));
+        $arguments = explode(" ", $arguments);
+
+        return $arguments;
     }
 
     /**
