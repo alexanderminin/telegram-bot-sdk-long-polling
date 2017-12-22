@@ -157,7 +157,7 @@ class CommandBus
             $this->execute($command, $action, $arguments, $update);
         } elseif (array_key_exists('not_command', $this->commands)) {
             // Use unnamed command handler for not command messages
-            $this->commands['not_command']->make($this->telegram, "", $this->parseArguments($message), $message);
+            $this->commands['not_command']->make($this->telegram, "", $this->parseArguments($message), $update);
         }
 
         return $update;
