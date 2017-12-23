@@ -35,6 +35,11 @@ abstract class Command implements CommandInterface
     protected $description;
 
     /**
+     * @var array The Telegram command actions description.
+     */
+    protected $actionsDescription;
+
+    /**
      * @var Api Holds the Super Class Instance.
      */
     protected $telegram;
@@ -97,6 +102,30 @@ abstract class Command implements CommandInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get Command Actions Description.
+     *
+     * @return array
+     */
+    public function getActionsDescription()
+    {
+        return $this->actionsDescription;
+    }
+
+    /**
+     * Set Command Action Description.
+     *
+     * @param $actionsDescription
+     *
+     * @return Command
+     */
+    public function setActionsDescription($actionsDescription)
+    {
+        $this->actionsDescription = $actionsDescription;
 
         return $this;
     }

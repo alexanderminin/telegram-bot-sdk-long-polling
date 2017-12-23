@@ -18,6 +18,11 @@ class HelpCommand extends Command
     protected $description = 'Список доступных команд';
 
     /**
+     * @var array Command Actions Description
+     */
+    protected $actionDescription = [];
+
+    /**
      * {@inheritdoc}
      */
     public function handle($action, $arguments)
@@ -25,8 +30,13 @@ class HelpCommand extends Command
         $commands = $this->telegram->getCommands();
 
         $text = '';
-        foreach ($commands as $name => $handler) {
-            $text .= sprintf('/%s - %s'.PHP_EOL, $name, $handler->getDescription());
+        foreach ($commands as $commandName => $handler) {
+            if ($commandName == 'last_command') continue;
+            $text .= sprintf('/%s - %s'.PHP_EOL, $commandName, $handler->getDescription());
+            foreach ($handler->getActionsDescription() as $actionName => $description) {
+                $text .= sprintf('/%s:%s %s'.PHP_EOL, $commandName, $actionName, $description);
+            }
+            $text .= PHP_EOL;
         }
 
         $this->replyWithMessage(compact('text'));
