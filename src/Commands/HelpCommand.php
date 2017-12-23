@@ -20,7 +20,7 @@ class HelpCommand extends Command
     /**
      * @var array Command Actions Description
      */
-    protected $actionDescription = [];
+    protected $actionsDescription = [];
 
     /**
      * {@inheritdoc}
@@ -32,11 +32,11 @@ class HelpCommand extends Command
         $text = '';
         foreach ($commands as $commandName => $handler) {
             if ($commandName == 'last_command') continue;
-            $text .= sprintf('/%s - %s'.PHP_EOL, $commandName, $handler->getDescription());
+            $text .= sprintf('/%s | %s.'.PHP_EOL, $commandName, $handler->getDescription());
             $actionsDescription = $handler->getActionsDescription();
             if ($actionsDescription) {
                 foreach ($handler->getActionsDescription() as $actionName => $description) {
-                    $text .= sprintf('/%s:%s %s' . PHP_EOL, $commandName, $actionName, $description);
+                    $text .= sprintf('%s:%s %s' . PHP_EOL, $commandName, $actionName, $description);
                 }
             }
             $text .= PHP_EOL;

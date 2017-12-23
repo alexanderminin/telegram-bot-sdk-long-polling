@@ -2,7 +2,7 @@
   "name": "alexanderminin/telegram-bot-sdk-long-polling",
   "description": "The Unofficial Telegram Bot API PHP SDK (fork irazasyed/telegram-bot-sdk v2.0)",
   "keywords": ["telegram", "telegram bot", "telegram bot api", "telegram sdk", "telegram php", "laravel telegram", "laravel", "long polling"],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "library",
   "authors": [
     {
